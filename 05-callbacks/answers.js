@@ -37,7 +37,7 @@ function passwordCheckerCb(email, password, cb){
 function passwordCheckerPrms(email, password){
   return new Promise((resolve, reject) => {
     passwordCheckerCb(email, password, (error, user) => {
-      if(user) resolve(user);
+      if(passwordChecker(email, password)) resolve(user);
       else reject(error);
     });
   });
@@ -60,8 +60,8 @@ function makePromiseFromFunctionWithCallback(fn, ...fnParams){
   */
   return new Promise((resolve, reject) => {
     fn(...fnParams, (error, user) => {
-      if(user) resolve(user);
-      else reject(error);
+      if(error) reject(error);
+      else resolve(user);
     })
   });
 }

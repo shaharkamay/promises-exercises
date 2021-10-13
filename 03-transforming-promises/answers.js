@@ -21,15 +21,27 @@ function mapPromise(promise, transformer){
  * @param {Promise<number | string>} numberPromise 
  * @returns {Promise<number>}
  */
+// function squarePromise(numberPromise){
+//   return numberPromise
+//     .then((val) => {
+//       return new Promise((resolve, reject) => {
+//         if(Number(val)) resolve(Number(val) * Number(val));
+//         else reject(`Cannot convert '${val}' to a number!`); 
+//       })
+//     })
+// }
 function squarePromise(numberPromise){
   return numberPromise
-    .then((val) => {
-      return new Promise((resolve, reject) => {
-        if(Number(val)) resolve(Number(val) * Number(val));
-        else reject(`Cannot convert '${val}' to a number!`); 
-      })
-    })
+    .then(/* IMPLEMENT ME! */(result)=>{
+      if(!isNaN(result)){
+        return result*result;
+      }
+      else{
+        throw `Cannot convert '${result}' to a number!`;
+      }
+    });
 }
+
 
 /**
  * EXERCISE 3
@@ -51,6 +63,7 @@ function squarePromiseOrZero(promise){
  * @param {Promise} promise 
  * @returns {Promise}
  */
+//.then(successCb, failureCb)
 function switcheroo(promise){
   return promise.then((val) => Promise.reject(val), (err) => Promise.resolve(err));
 }
